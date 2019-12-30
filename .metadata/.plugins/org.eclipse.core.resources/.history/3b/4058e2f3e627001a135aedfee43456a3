@@ -1,0 +1,21 @@
+package com.bridgelabz.loginregistration.dao;
+import java.sql.*;
+import com.bridgelabz.loginregistration.repository.ConnectionsProviderImpl;
+
+public class LoginDao {
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	String sql = "select * from users where userName=? & password=?";
+
+	public boolean check(String usersName, String pass) throws SQLException {
+		con = ConnectionsProviderImpl.getConnection();
+		pstmt = con.prepareStatement("insert into customer values(?,?,?)");
+		pstmt.setString(1, usersName);
+		pstmt.setString(2, pass);
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next()) {
+			return true;
+		}
+		return false;
+	}
+}

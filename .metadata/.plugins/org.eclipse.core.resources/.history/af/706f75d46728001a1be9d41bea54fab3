@@ -1,0 +1,40 @@
+package com.bridgelabz.loginregistration.controller;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.bridgelabz.loginregistration.dao.LoginDao;
+import com.bridgelabz.loginregistration.model.Customer;
+
+@WebServlet("/Registration")
+public class Registration extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("Inside LoginReg");
+		LoginDao logindao = new LoginDao();
+
+		String submitType = request.getParameter("Submit");
+		Customer customer = new Customer();
+
+		if (submitType.equals("Register")) {
+			customer.setUserId(request.getIntHeader("userId"));
+			customer.setFirstName(request.getParameter("firstName"));
+			customer.setLastName(request.getParameter("lastName"));
+			customer.setUserName(request.getParameter("userName"));
+			customer.setAge(request.getIntHeader("age"));
+			customer.setPassword(request.getParameter("password"));
+
+			logindao.registerCustomer(customer);
+			request.setAttribute("successMessage", "Registration Done,Please Login!!");
+			// response.sendRedirect("login.jsp");
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}
+
+	}
+}

@@ -1,0 +1,15 @@
+package com.bridgelabz.utility;
+
+import com.bridgelabz.loginregistration.model.Customer;
+
+public class Validatedata {
+	
+	
+	
+	public static int validatedata(Customer cust) {
+		
+		return 0;
+	}
+	
+
+}

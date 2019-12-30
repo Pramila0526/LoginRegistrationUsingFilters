@@ -1,0 +1,49 @@
+package com.bridgelabz.loginregistration.dao;
+import java.sql.*;
+
+import com.bridgelabz.loginregistration.model.Customer;
+import com.bridgelabz.loginregistration.repository.ConnectionsProviderImpl;
+
+public class LoginDao {
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	String sql = "select * from users where UserName=? and password=?";
+
+	public boolean check(String usersName, String pass) throws SQLException {
+		con = ConnectionsProviderImpl.getConnection();
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, usersName);
+		pstmt.setString(2, pass);
+		System.out.println("user" + usersName);
+		System.out.println("passoword" + pass);
+		ResultSet resultset = pstmt.executeQuery();
+		if (resultset.next()) 
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public int registerCustomer(Customer cust) {
+		int status = 0;
+		try {
+			con = ConnectionsProviderImpl.getConnection();
+			pstmt = con.prepareStatement("insert into users values(?,?,?,?,?,?)");
+			pstmt.setInt(1, cust.getUserId());
+			pstmt.setString(2, cust.getFirstName());
+			pstmt.setString(3, cust.getLastName());
+			pstmt.setString(4, cust.getUserName());
+			pstmt.setInt(5, cust.getAge());
+			pstmt.setString(6, cust.getPassword());
+
+			status = pstmt.executeUpdate();
+			con.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return status;
+	}
+	
+	public void forgotPassword
+
+}

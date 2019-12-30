@@ -1,0 +1,5 @@
+INDEX VERSION 1.131
+/home/admin94/Desktop/LoginRegistration/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/3617088565.index
+/LoginAndRegistration/src
+/home/admin94/Desktop/LoginRegistration/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2059578710.index
+/LoginAndRegistration/src

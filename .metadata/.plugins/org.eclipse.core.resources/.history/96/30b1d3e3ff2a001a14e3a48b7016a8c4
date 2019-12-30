@@ -1,0 +1,32 @@
+package com.bridgelabz.utility;
+
+import java.io.PrintWriter;
+import java.net.http.HttpResponse;
+
+import com.bridgelabz.loginregistration.model.Customer;
+
+public class Validatedata {
+	
+	
+	
+	public static int validatedata(Customer cust) {
+		
+		HttpResponse response=new HttpResponse();
+		
+		String firstname=cust.getFirstName();
+		
+		 if(firstname.isBlank()) {
+			 PrintWriter out = response.getWriter();
+				response.setContentType("text/html");
+				out.println("<script type=\"text/javascript\">");
+				out.println("alert('Login Successfully...');");
+				out.println("location='Welcome.jsp';");
+				out.println("</script>");
+			 
+		 }
+		
+		return 0;
+	}
+	
+
+}

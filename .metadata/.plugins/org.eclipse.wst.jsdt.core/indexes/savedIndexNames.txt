@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+/home/admin94/Desktop/LoginRegistration/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+2029808606.index
+3617088565.index
+3976040425.index
+500708799.index
+1955406824.index
+2721178749.index
+1946617859.index

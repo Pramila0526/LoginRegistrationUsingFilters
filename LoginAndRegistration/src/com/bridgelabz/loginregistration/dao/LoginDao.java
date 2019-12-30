@@ -1,0 +1,73 @@
+package com.bridgelabz.loginregistration.dao;
+import java.sql.*;
+
+import com.bridgelabz.loginregistration.model.Customer;
+import com.bridgelabz.loginregistration.repository.ConnectionsProviderImpl;
+/**************************************************************************************************
+ * @author 	Pramila05263
+ * Purpose	Code to Implement SQL Queries
+ *
+ ***********************************************************************************************/
+public class LoginDao {
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	PreparedStatement pstmt1=null;
+	String sql = "select * from users where UserName=? and password=?";
+
+	// Method to check Whether the Entered User Exists Or Not
+	public boolean check(String usersName, String pass) throws SQLException {
+		con = ConnectionsProviderImpl.getConnection();
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, usersName);
+		pstmt.setString(2, pass);
+		System.out.println("user" + usersName);
+		System.out.println("passoword" + pass);
+		ResultSet resultset = pstmt.executeQuery();
+		if (resultset.next()) 
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	// Method to register the Customer
+	public int registerCustomer(Customer cust) {
+		int status = 0;
+		try {
+			con = ConnectionsProviderImpl.getConnection();
+			pstmt = con.prepareStatement("insert into users values(?,?,?,?,?,?)");
+			pstmt.setInt(1, cust.getUserId());
+			pstmt.setString(2, cust.getFirstName());
+			pstmt.setString(3, cust.getLastName());
+			pstmt.setString(4, cust.getUserName());
+			pstmt.setInt(5, cust.getAge());
+			pstmt.setString(6, cust.getPassword());
+
+			status = pstmt.executeUpdate();
+			con.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return status;
+	}
+	
+	// Method To Confirm the Password
+	public boolean confirmPass(String pass) throws SQLException
+	{
+		String sqlquery = "select * from users where password=?";
+		String sqlquery2="update users set password=samila05267 where password='samila0526";
+				con = ConnectionsProviderImpl.getConnection();
+		pstmt = con.prepareStatement(sqlquery);
+		pstmt1 = con.prepareStatement(sqlquery2);
+		pstmt.setString(1, pass);
+		System.out.println("passoword" + pass);
+		ResultSet resultset = pstmt.executeQuery();
+		if (resultset.next()) 
+		{
+			 resultset = pstmt1.executeQuery();
+		}
+		return false;
+	}
+		
+		
+}

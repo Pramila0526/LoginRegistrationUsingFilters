@@ -1,0 +1,17 @@
+package com.bridgelabz.loginregistration.model;
+
+
+/*************************************************************************************************************
+ * @author :Pramila0526 
+ * Purpose :POJO Class of Customer
+ *
+ ******************************************************************************************************************/
+public class Customer {
+	private int userId;
+	private String firstName;
+	private String lastName;
+	private String userName;
+	private String password;
+
+	
+}

@@ -1,0 +1,71 @@
+package com.bridgelabz.loginregistration.controller;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.bridgelabz.loginregistration.dao.LoginDao;
+import com.bridgelabz.loginregistration.model.Customer;
+import com.bridgelabz.utility.Validatedata;
+
+@WebServlet("/Registration")
+public class Registration extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("Inside LoginReg");
+		LoginDao logindao = new LoginDao();
+
+		String submitType = request.getParameter("Submit");
+		Customer customer = new Customer();
+		String firstname=request.getParameter("firstname");
+		String lastname=request.getParameter("lastname");
+		String username=request.getParameter("userName");
+		String password=request.getParameter("password");
+	/*	if(firstname.isBlank()) {	
+			System.out.println("1");
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html");
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('First name  is empty..Please Fill All Data');");
+			out.println("location='register.jsp';");
+			out.println("</script>");			
+		}
+		else {
+			System.out.println("2");
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html");
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('first name  is empty...');");
+			out.println("location='register.jsp';");
+			out.println("</script>");
+			
+		}
+		*/
+    
+		if (submitType.equals("Register")) {
+			
+			customer.setFirstName(request.getParameter("firstname"));
+			customer.setLastName(request.getParameter("lastname"));
+			customer.setUserName(request.getParameter("username"));
+			Integer it = Integer.parseInt(request.getParameter("age"));
+			customer.setAge(it);
+			customer.setPassword(request.getParameter("password"));
+			int  validate=Validatedata.validatedata(customer);
+			 if(validate>0) {
+				 
+				 logindao.registerCustomer(customer);
+					request.setAttribute("successMessage", "Registration Done,Please Login!!");
+					request.getRequestDispatcher("login.jsp").forward(request, response);
+				 
+			 }
+			 
+			
+		}
+
+	}
+}
